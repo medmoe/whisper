@@ -16,25 +16,25 @@ jobs:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
-      steps:
-        - uses: actions/checkout@v2
-        - name: Set up Python 3.9
-          uses: actions/setup-python@v2
-          with:
-            python-version: 3.9
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
 
-        - name: psycopg2 prerequisites
-          run: sudo apt-get install libpq-dev
-        - name: Install dependencies
-          run: |
-            python -m pip install --upgrade pip
-            pip install -r requirements.txt
-        - name: Run migrations
-          run: |
-            cd backend
-            python manage.py migrate
-        - name: Run backend tests
-          run: |
-            cd backend
-            python manage.py test whisper.tests
+      - name: psycopg2 prerequisites
+        run: sudo apt-get install libpq-dev
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run migrations
+        run: |
+          cd backend
+          python manage.py migrate
+      - name: Run backend tests
+        run: |
+          cd backend
+          python manage.py test whisper.tests
         
