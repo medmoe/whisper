@@ -61,3 +61,19 @@ class LogoutView(APIView):
             return Response(data={'message': 'logged out successfully'}, status=status.HTTP_200_OK)
         except ObjectDoesNotExist:
             return Response(data={'message': 'Bad Request'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserInfoView(APIView):
+    def post(self, request):
+        data = request.data
+        try:
+            session = Session.objects.get(session_id=data['session_id'])
+            response_data = {
+                'first_name': session.user.first_name,
+                'last_name': session.user.last_name,
+                'email': session.user.email,
+                'username': session.user.username
+            }
+            return Response(data=response_data, status=status.HTTP_200_OK)
+        except ObjectDoesNotExist:
+            return Response(data={'message': 'Bad request'}, status=status.HTTP_400_BAD_REQUEST)

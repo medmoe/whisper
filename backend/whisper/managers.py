@@ -5,8 +5,8 @@ from django.db import models
 
 class SessionManager(models.Manager):
     def create_session(self, user):
-        session_id = str(uuid.uuid4()).split("-")[0]
-        session = self.create(user=user, session_id=session_id)
+        key = str(uuid.uuid4()).split("-")[0]
+        session = self.create(user=user, session_id=hashlib.sha256(key.encode()).hexdigest())
         return session
 
 

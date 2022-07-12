@@ -34,3 +34,13 @@ class TestAuthenticationSystem(APITestCase):
         users = User.objects.filter(username="username")
         sessions = Session.objects.filter(user=users[0])
         self.assertFalse(sessions)
+
+    def test_user_can_retrieve_info(self):
+        _ = self.client.post('/signup/', data=self.data, format='json')
+        login_response = self.client.post('/login/', {'username': 'username', 'password': 'secret'}, format='json')
+        response = self.client.post('/user/', {'session_id': login_response.data['session_id']}, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['first_name'], self.data['first_name'])
+        self.assertEqual(response.data['last_name'], self.data['last_name'])
+        self.assertEqual(response.data['email'], self.data['email'])
+        self.assertEqual(response.data['username'], self.data['username'])
