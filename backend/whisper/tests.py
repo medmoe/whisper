@@ -23,12 +23,12 @@ class TestAuthenticationSystem(APITestCase):
 
     def test_user_can_log_in(self):
         _ = self.client.post('/signup/', data=self.data, format='json')
-        response = self.client.post('/login/', data={'username': 'username', 'password': 'secret'}, format='json')
+        response = self.client.post('/forms/', data={'username': 'username', 'password': 'secret'}, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_user_can_log_out(self):
         _ = self.client.post('/signup/', data=self.data, format='json')
-        _ = self.client.post('/login/', data={'username': 'username', 'password': 'secret'}, format='json')
+        _ = self.client.post('/forms/', data={'username': 'username', 'password': 'secret'}, format='json')
         response = self.client.post('/logout/', data={'username': 'username'}, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         users = User.objects.filter(username="username")
@@ -37,7 +37,7 @@ class TestAuthenticationSystem(APITestCase):
 
     def test_user_can_retrieve_info(self):
         _ = self.client.post('/signup/', data=self.data, format='json')
-        login_response = self.client.post('/login/', {'username': 'username', 'password': 'secret'}, format='json')
+        login_response = self.client.post('/forms/', {'username': 'username', 'password': 'secret'}, format='json')
         response = self.client.post('/user/', {'session_id': login_response.data['session_id']}, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['first_name'], self.data['first_name'])

@@ -3,7 +3,6 @@ import axios from 'axios'
 import styles from './Home.module.css'
 
 interface HomeTypes {
-    isLogin: boolean,
     isSignUp: boolean,
     error?: string,
     isLoggedIn: boolean,
@@ -19,7 +18,6 @@ interface FormDataTypes {
 }
 
 const homeInit = {
-    isLogin: false,
     isSignUp: false,
     error: "",
     isLoggedIn: false,
@@ -39,7 +37,7 @@ export function Home() {
     const [formData, setFormData] = useState<FormDataTypes>(formDataInit);
     useEffect(() => {
         const session_id = localStorage.getItem("session_id")
-        if(!homeData.isLoggedIn){
+        if (!homeData.isLoggedIn) {
             if (session_id) {
                 axios.post("http://localhost:8000/user/", {"session_id": session_id})
                     .then((res) => {
@@ -63,16 +61,7 @@ export function Home() {
     })
     const signUp = () => {
         setHomeData({
-            isSignUp: true,
-            isLogin: false,
-            error: "",
-            isLoggedIn: false,
-        })
-    }
-    const login = () => {
-        setHomeData({
-            isLogin: true,
-            isSignUp: false,
+            isSignUp: !homeData.isSignUp,
             error: "",
             isLoggedIn: false,
         })
@@ -86,9 +75,6 @@ export function Home() {
             .catch((err) => {
                 console.log(err);
             })
-    }
-    const goHome = () => {
-        setHomeData(homeInit);
     }
     const handleChange = (event: FormEvent) => {
         event.preventDefault();
@@ -141,54 +127,45 @@ export function Home() {
     }
     return (
         <div>
-            {homeData.isLoggedIn ?
-                <div className={styles.nav_bar}>
-                    <ul>
-                        <li>Home</li>
-                        <li onClick={logout}>Logout</li>
-                        <li>Welcome!, {formData.username}</li>
-                    </ul>
+            {!homeData.isSignUp ?
+                <div className={styles.login_form_wrapper}>
+                    <form className={styles.login_form}>
+                        <label className={styles.form_title}>Sign in</label>
+                        <input type="text" name="username" placeholder="Username" onChange={handleChange}/>
+                        <input type="password" name="password" placeholder="Password" onChange={handleChange}/>
+                        <input type="submit" value="submit" id={styles['form_btn']} onClick={submitLoginForm}/>
+                    </form>
+                    <div className={styles.login_helpers}>
+                        <p onClick={signUp}>Create account</p>
+                        <p>Forgot password?</p>
+                    </div>
+                    {homeData.error ? <div className={styles.error}><h4>{homeData.error}</h4></div> : <div></div>}
                 </div>
                 :
-                <div className={styles.nav_bar}>
-                    <ul>
-                        <li onClick={goHome}>Home</li>
-                        <li onClick={login}>Login</li>
-                        <li onClick={signUp}>Sign up</li>
-                    </ul>
+                <div className={styles.signup_form_wrapper}>
+                    <form className={styles.signup_form}>
+                        <label className={styles.form_title}>Sign up</label>
+                        <input type="text" name="first_name" id="first_name" placeholder="First name"
+                               onChange={handleChange}/>
+                        <input type="text" name="last_name" id="last_name" placeholder="Last name"
+                               onChange={handleChange}/>
+                        <input type="text" name="email" id="email" placeholder="Email" onChange={handleChange}/>
+                        <input type="text" name="username" id="username" placeholder="Username"
+                               onChange={handleChange}/>
+                        <input type="password" name="password" id="password" placeholder="Password"
+                               onChange={handleChange}/>
+                        <input type="password" name="confirm_password" id="confirm-password"
+                               placeholder="Re-enter password" onChange={handleChange}/>
+                        <input type="submit" value="submit" id={styles['form_btn']} onClick={submitSignUpForm}/>
+                    </form>
+                    <div className={styles.signup_helpers}>
+                        <p onClick={signUp}>Login</p>
+                        <p>need help?</p>
+                    </div>
+                    {homeData.error ? <div className={styles.error}><p>{homeData.error}</p></div> : <div></div>}
                 </div>
             }
-
-            {homeData.isSignUp ?
-                <div className={styles.form_wrapper}>
-                    <form className={styles.auth_form}>
-                        <label htmlFor="first_name">First name: </label>
-                        <input type="text" name="first_name" id="first_name" onChange={handleChange}/>
-                        <label htmlFor="last_name">Last name: </label>
-                        <input type="text" name="last_name" id="last_name" onChange={handleChange}/>
-                        <label htmlFor="email">Email:</label>
-                        <input type="text" name="email" id="email" onChange={handleChange}/>
-                        <label htmlFor="username">Username:</label>
-                        <input type="text" name="username" id="username" onChange={handleChange}/>
-                        <label htmlFor="password">Password: </label>
-                        <input type="password" name="password" id="password" onChange={handleChange}/>
-                        <label htmlFor="confirm_password">Re-enter password:</label>
-                        <input type="password" name="confirm_password" id="confirm-password" onChange={handleChange}/>
-                        <input type="submit" value="submit" onClick={submitSignUpForm}/>
-                    </form>
-                </div> : <></>}
-            {homeData.isLogin ?
-                <div className={styles.form_wrapper}>
-                    <form className={styles.auth_form}>
-                        <label htmlFor="username">Username: </label>
-                        <input type="text" name="username" onChange={handleChange}/>
-                        <label htmlFor="password">Password: </label>
-                        <input type="password" name="password" onChange={handleChange}/>
-                        <input type="submit" value="submit" onClick={submitLoginForm}/>
-                    </form>
-                </div>
-                : <></>}
-            {homeData.error ? <div className={styles.error}><h4>{homeData.error}</h4></div> : <></>}
+            {/*// */}
         </div>
     );
 }
