@@ -15,7 +15,7 @@
     height: 635px;
     left: 450px;
     top: 200px;
-    background: #C4EDFF;
+    background: #1f1ddf;
     border-radius: 5px;
     box-shadow: 1px 1px 20px 10px black;
 
@@ -56,7 +56,7 @@
 }
 
 #form_btn {
-    background-color: #0000f0;
+    background-color: #ff5000;
     border-radius: 50px;
     font-family: 'Alegreya', sans-serif;
     font-weight: 400;
@@ -67,7 +67,7 @@
 }
 
 #form_btn:hover {
-    background-color: #0000aa;
+    background-color: #f05000;
 }
 
 .login_helpers {
@@ -106,7 +106,7 @@
     height: 961px;
     left: 451px;
     top: 28px;
-    background: #C4EDFF;
+    background: #1f1ddf;
     border-radius: 5px;
     box-shadow: 1px 1px 20px 10px black;
 }

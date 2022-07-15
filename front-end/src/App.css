@@ -2,5 +2,6 @@
 body {
     box-sizing: border-box;
     background-color: #f1f6f0;
-    background-image: url("./assets/images/people.png");
+    background-image: url("assets/images/people.png");
+    max-width: 1440px;
 }
