@@ -5,6 +5,15 @@ import travel from './travel.png'
 import food from './food.png'
 import water from './water_drop.png'
 
-export const categories: string[] = [
-    building, movie, music, travel, food, water
+interface Category{
+    name: string;
+    url: string;
+}
+export const categories: Category[] = [
+    {name: 'building', url: building},
+    {name: 'movie', url: movie},
+    {name: 'music', url: music},
+    {name: 'travel', url: travel},
+    {name: 'food', url: food},
+    {name: 'water', url: water},
 ]

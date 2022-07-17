@@ -5,6 +5,7 @@
     height: 100vh;
 
 }
+
 .sidebar {
     position: absolute;
     width: 25%;
@@ -13,11 +14,13 @@
     top: 0;
     background-color: #1f1ddf;
 }
+
 .sidebar_items_container {
     position: absolute;
     top: 35px;
 }
-.sidebar_item{
+
+.sidebar_item {
     display: flex;
     color: #ffffff;
     margin-top: 38px;
@@ -26,7 +29,8 @@
     line-height: 29px;
     font-weight: 700;
 }
-.sidebar_item img{
+
+.sidebar_item img {
     margin-top: 15px;
     filter: invert(100%);
     width: 45px;
@@ -34,15 +38,18 @@
     left: 0;
     margin-right: 15px;
 }
-.sidebar_item p{
+
+.sidebar_item p {
     cursor: pointer;
 }
+
 .content {
     position: absolute;
     width: 75%;
     height: 100vh;
     left: 361px;
 }
+
 .category {
     display: inline-block;
     width: 100px;
@@ -52,13 +59,28 @@
     background-color: #1f1ddf;
     border-radius: 10px;
 }
+
 .category_container {
     margin-top: 59px;
     margin-left: 6%;
 }
+
 .category img {
     filter: invert(100%);
     width: 54px;
     height: 54px;
     margin: 23px 23px;
+    cursor: pointer;
+}
+
+.helper_text {
+    margin-top: -50px;
+    font-family: 'Tibetan Machine Uni', sans-serif;
+    font-size: 16px;
+    text-align: center;
+    color: #ffffff;
+    visibility: hidden;
+}
+.category img:hover + .helper_text{
+    visibility: visible;
 }

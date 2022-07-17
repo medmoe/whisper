@@ -4,7 +4,8 @@ import home from '../../assets/icons/home_icon.svg'
 import profile from '../../assets/icons/profile_icon.svg'
 import logout from '../../assets/icons/logout_icon.png'
 import {categories} from "../../assets/icons/icons";
-interface PropTypes{
+
+interface PropTypes {
     handleLogout: () => void
 }
 
@@ -29,13 +30,17 @@ export function Dashboard({handleLogout}: PropTypes) {
             </div>
             <div className={styles.content}>
                 <div className={styles.category_container}>
-                {categories.map((url, idx) => {
-                    return (
-                    <div key={idx} className={styles.category}>
-                        <img src={url} alt="icon" />
-                    </div>
-                    )
-                })}
+                    {categories.map(({name, url}, idx) => {
+                        return (
+                            <div key={idx} className={styles.category}>
+                                <img src={url} alt="icon"/>
+                                <div className={styles.helper_text}>
+                                    <p>{name}</p>
+                                </div>
+                            </div>
+                        )
+                    })}
+
                 </div>
             </div>
         </div>

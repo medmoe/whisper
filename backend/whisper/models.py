@@ -16,8 +16,18 @@ class User(models.Model):
 
 
 class Room(models.Model):
-    users = models.ManyToManyField(User)
+    class Category(models.TextChoices):
+        BUILDINGS = 'buildings'
+        MOVIES = 'movies'
+        MUSIC = 'music'
+        TRAVEL = 'travel'
+        FOOD = 'food'
+        WATER = 'water'
+        OTHER = 'other'
+
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='owner')
     name = models.CharField(max_length=100)
+    category = models.CharField(max_length=50, choices=Category.choices, default=Category.OTHER)
     size = models.CharField(max_length=100)
     private = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
@@ -29,6 +39,3 @@ class Session(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     objects = models.Manager()
     session = SessionManager()
-
-
-
