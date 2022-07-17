@@ -81,10 +81,35 @@ class TestRoomHandlers(APITestCase):
 
     #
     def test_user_can_get_room(self):
-        pass
-#
-#     def test_user_can_update_room(self):
-#         pass
-#
-#     def test_user_can_delete_room(self):
-#         pass
+        _ = self.client.post('/login/', data={'username': 'med', 'password': 'secret'}, format='json')
+        rooms = Room.objects.all()
+        response = self.client.get(f'/rooms/{rooms[0].pk}/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['name'], 'room1')
+
+    def test_user_can_update_room(self):
+        _ = self.client.post('/login/', data={'username': 'med', 'password': 'secret'}, format='json')
+        room_data = {
+            "name": 'room193',
+            "category": 'buildings',
+            "size": "199",
+        }
+        response_of_created_room = self.client.post('/rooms/', data=room_data, format='json')
+        data = response_of_created_room.data
+        data['name'] = 'updated_room_name'
+        response = self.client.put(f'/rooms/{data["id"]}/', data=data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['name'], 'updated_room_name')
+
+    def test_user_can_delete_room(self):
+        _ = self.client.post('/login/', data={'username': 'med', 'password': 'secret'}, format='json')
+        room_data = {
+            "name": 'room193',
+            "category": 'buildings',
+            "size": "199",
+        }
+        response_of_created_room = self.client.post('/rooms/', data=room_data, format='json')
+        self.assertEqual(len(Room.objects.all()), 3)
+        response = self.client.delete(f'/rooms/{response_of_created_room.data["id"]}/', data=response_of_created_room.data)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(len(Room.objects.all()), 2)

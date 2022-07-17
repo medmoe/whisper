@@ -10,6 +10,9 @@ def is_authenticated(func):
             session = Session.objects.get(session_id=args[1].COOKIES.get('session_id'))
             if args[1].method == "POST":
                 args[1].data['owner'] = session.user.id
+            elif args[1].method in ('PUT', 'DELETE'):
+                if int(session.user.id) != int(args[1].data['owner']):
+                    return Response(status=status.HTTP_401_UNAUTHORIZED)
             return func(*args, **kwargs)
         except ObjectDoesNotExist:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
