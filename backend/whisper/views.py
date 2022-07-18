@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from .models import User, Session, Room
-from .serializers import UserSignUpSerializer, RoomSerializer
+from .serializers import UserSerializer, RoomSerializer
 from .decorators import is_authenticated
 
 
@@ -48,7 +48,8 @@ class UserLoginView(APIView):
                 # create a session
                 session = Session.session.create_session(user)
                 response.set_cookie('session_id', session.session_id, httponly=True)
-                response.data = {'message': 'logged in successfully', 'username': user.username}
+                serializer = UserSerializer(user)
+                response.data = serializer.data
                 response.status_code = status.HTTP_200_OK
                 return response
         except ObjectDoesNotExist:
@@ -71,13 +72,8 @@ class UserInfoView(APIView):
     def get(self, request):
         try:
             session = Session.objects.get(session_id=request.COOKIES.get('session_id'))
-            response_data = {
-                'first_name': session.user.first_name,
-                'last_name': session.user.last_name,
-                'email': session.user.email,
-                'username': session.user.username
-            }
-            return Response(data=response_data, status=status.HTTP_200_OK)
+            serializer = UserSerializer(session.user)
+            return Response(data=serializer.data, status=status.HTTP_200_OK)
         except ObjectDoesNotExist:
             return Response(data={'message': 'Bad request'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -85,7 +81,7 @@ class UserInfoView(APIView):
 class RoomsListView(APIView):
     @is_authenticated
     def get(self, request):
-        rooms = Room.objects.all()
+        rooms = Room.objects.filter(category=request.query_params.get('category'))
         serializer = RoomSerializer(rooms, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 

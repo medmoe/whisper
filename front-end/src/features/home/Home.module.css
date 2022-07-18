@@ -58,12 +58,13 @@
 #form_btn {
     background-color: #ff5000;
     border-radius: 50px;
-    font-family: 'Alegreya', sans-serif;
+    font-family: 'Tibetan Machine Uni', sans-serif;
     font-weight: 400;
-    font-size: 28px;
+    font-size: 24px;
     line-height: 38px;
     color: #ffffff;
     cursor: pointer;
+    text-transform: uppercase;
 }
 
 #form_btn:hover {
@@ -162,3 +163,70 @@
 .signup_helpers p:hover {
     color: #0000f0;
 }
+
+.room_creation_form_container {
+    position: absolute;
+    width: 80%;
+    height: 40%;
+    background: #1f1ddf;
+    border-radius: 5px;
+    box-shadow: 1px 1px 20px 10px black;
+}
+.room_creation_form{
+    position: absolute;
+    top: 32px;
+}
+.room_creation_form input {
+    display: block;
+    border: none;
+    outline: none;
+    background-color: #ffffff;
+    width: 550px;
+    height: 78px;
+    margin-left: 54px;
+    margin-top: 30px;
+    border-radius: 5px;
+    font-family: 'Tibetan Machine Uni', sans-serif;
+    font-size: 24px;
+}
+.room_creation_form input[type=radio] {
+    width: 20px;
+    height: 20px;
+}
+.room_creation_form input::placeholder {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 33px;
+    font-family: 'Alegreya', sans-serif;
+    color: #dddddd;
+}
+#radio_private {
+    position: absolute;
+    font-family: 'Tibetan Machine Uni', sans-serif;
+    color: #ffffff;
+    margin-left: 84px;
+    margin-top: -24px;
+}
+
+#select_category {
+    position: absolute;
+    font-family: 'Tibetan Machine Uni', sans-serif;
+    color: #ffffff;
+    margin-left: 54px;
+    margin-top: 35px;
+}
+
+#select{
+    outline: none;
+    width: 30%;
+    height: 58px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    margin-left: 150px;
+}
+#select option{
+    font-size: 20px;
+    font-family: 'Tibetan Machine Uni', sans-serif;
+}
+

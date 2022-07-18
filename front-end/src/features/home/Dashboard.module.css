@@ -81,6 +81,50 @@
     color: #ffffff;
     visibility: hidden;
 }
-.category img:hover + .helper_text{
+
+.category img:hover + .helper_text {
     visibility: visible;
+}
+
+.rooms_list_container {
+    position: absolute;
+    top: 12%;
+    width: 90%;
+    height: 76%;
+}
+.rooms_table{
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    text-align: left;
+    font-family: 'Crimson Text', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 23px;
+}
+.rooms_table thead th:nth-child(1) {
+    width: 40%;
+}
+.rooms_table thead th:nth-child(2) {
+    width: 20%;
+}
+.rooms_table thead th:nth-child(3) {
+    width: 10%;
+}
+.rooms_table th, td{
+    padding: 20px;
+}
+.btn {
+    border: none;
+    padding: 10px;
+    text-transform: uppercase;
+    background-color: #ff5000;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.btn:hover{
+    background-color: #ff8000;
 }

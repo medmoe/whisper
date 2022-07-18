@@ -2,6 +2,8 @@ import React, {FormEvent, useEffect, useState} from 'react'
 import axios from 'axios'
 import styles from './Home.module.css'
 import {Dashboard} from "./Dashboard";
+import {useAppDispatch, useAppSelector} from "../../app/hooks";
+import {updateRooms, updateRoomsAreFetched, updateUserData, selectUser} from "./homeSlice";
 
 interface HomeTypes {
     isSignUp: boolean,
@@ -36,30 +38,21 @@ const formDataInit = {
 export function Home() {
     const [homeData, setHomeData] = useState<HomeTypes>(homeInit);
     const [formData, setFormData] = useState<FormDataTypes>(formDataInit);
+    const dispatch = useAppDispatch();
+    const user = useAppSelector(selectUser)
     useEffect(() => {
-        const session_id = localStorage.getItem("session_id")
-        if (!homeData.isLoggedIn) {
-            if (session_id) {
-                axios.post("http://localhost:8000/user/", {"session_id": session_id})
-                    .then((res) => {
-                        setHomeData({
-                            ...homeData,
-                            isLoggedIn: true,
-                        })
-                        setFormData({
-                            ...formData,
-                            first_name: res.data.first_name,
-                            last_name: res.data.last_name,
-                            email: res.data.email,
-                            username: res.data.username,
-                        })
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    })
-            }
-        }
-    })
+        axios.get('http://localhost:8000/user/', {withCredentials: true})
+            .then((res) => {
+                dispatch(updateUserData(res.data))
+                setHomeData({
+                    ...homeData,
+                    isLoggedIn: true,
+                })
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    },[])
     const signUp = () => {
         setHomeData({
             isSignUp: !homeData.isSignUp,
@@ -68,7 +61,7 @@ export function Home() {
         })
     }
     const logout = () => {
-        axios.post('http://localhost:8000/logout/', {'username': formData.username})
+        axios.post('http://localhost:8000/logout/', {'username': user.username})
             .then((res) => {
                 setHomeData(homeInit);
                 setFormData(formDataInit);
@@ -109,12 +102,11 @@ export function Home() {
     }
     const submitLoginForm = (event: FormEvent) => {
         event.preventDefault();
-        console.log(formData);
         axios.post('http://localhost:8000/login/', {
             'username': formData.username, 'password': formData.password
-        })
+        }, {withCredentials: true})
             .then((res) => {
-                localStorage.setItem("session_id", res.data.session_id)
+                dispatch(updateUserData(res.data))
                 setHomeData({
                     ...homeInit,
                     isLoggedIn: true,
@@ -125,6 +117,17 @@ export function Home() {
                     ...homeData,
                     error: "Credentials are incorrect!",
                 })
+            })
+    }
+    const getAvailableRooms = (event: React.MouseEvent<HTMLImageElement>) => {
+        const target = event.target as HTMLImageElement
+        axios.get(`http://localhost:8000/rooms/?category=${target.alt}`, {withCredentials:true})
+            .then((res) => {
+                dispatch(updateRooms(res.data))
+                dispatch(updateRoomsAreFetched())
+            })
+            .catch((err) => {
+                console.log(err);
             })
     }
     return (
@@ -172,7 +175,7 @@ export function Home() {
                     }
                 </div>
                 :
-                <Dashboard handleLogout={logout} />
+                <Dashboard handleLogout={logout} getAvailableRooms={getAvailableRooms} />
             }
         </div>
     );

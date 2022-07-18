@@ -10,7 +10,7 @@ interface Category{
     url: string;
 }
 export const categories: Category[] = [
-    {name: 'building', url: building},
+    {name: 'buildings', url: building},
     {name: 'movie', url: movie},
     {name: 'music', url: music},
     {name: 'travel', url: travel},

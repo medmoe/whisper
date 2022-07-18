@@ -64,7 +64,8 @@ class TestRoomHandlers(APITestCase):
     def test_user_can_get_rooms_list(self):
         login_response = self.client.post('/login/', data={'username': 'med', 'password': 'secret'}, format='json')
         self.assertEqual(login_response.status_code, status.HTTP_200_OK)
-        response = self.client.get('/rooms/')
+        response = self.client.get('/rooms/?category=buildings')
+        print(response.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 2)
 
