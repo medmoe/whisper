@@ -1,0 +1,130 @@
+.wrapper {
+    position: relative;
+    background-color: #f1f6f0;
+    width: 100%;
+    height: 100vh;
+
+}
+
+.sidebar {
+    position: absolute;
+    width: 25%;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    background-color: #1f1ddf;
+}
+
+.sidebar_items_container {
+    position: absolute;
+    top: 35px;
+}
+
+.sidebar_item {
+    display: flex;
+    color: #ffffff;
+    margin-top: 38px;
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    line-height: 29px;
+    font-weight: 700;
+}
+
+.sidebar_item img {
+    margin-top: 15px;
+    filter: invert(100%);
+    width: 45px;
+    height: 45px;
+    left: 0;
+    margin-right: 15px;
+}
+
+.sidebar_item p {
+    cursor: pointer;
+}
+
+.content {
+    position: absolute;
+    width: 75%;
+    height: 100vh;
+    left: 361px;
+}
+
+.category {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    margin-right: 26px;
+    margin-bottom: 26px;
+    background-color: #1f1ddf;
+    border-radius: 10px;
+}
+
+.category_container {
+    margin-top: 59px;
+    margin-left: 6%;
+}
+
+.category img {
+    filter: invert(100%);
+    width: 54px;
+    height: 54px;
+    margin: 23px 23px;
+    cursor: pointer;
+}
+
+.helper_text {
+    margin-top: -50px;
+    font-family: 'Tibetan Machine Uni', sans-serif;
+    font-size: 16px;
+    text-align: center;
+    color: #ffffff;
+    visibility: hidden;
+}
+
+.category img:hover + .helper_text {
+    visibility: visible;
+}
+
+.rooms_list_container {
+    position: absolute;
+    top: 12%;
+    width: 90%;
+    height: 76%;
+}
+.rooms_table{
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    text-align: left;
+    font-family: 'Crimson Text', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 23px;
+}
+.rooms_table thead th:nth-child(1) {
+    width: 40%;
+}
+.rooms_table thead th:nth-child(2) {
+    width: 20%;
+}
+.rooms_table thead th:nth-child(3) {
+    width: 10%;
+}
+.rooms_table th, td{
+    padding: 20px;
+}
+.btn {
+    border: none;
+    padding: 10px;
+    text-transform: uppercase;
+    background-color: #ff5000;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.btn:hover{
+    background-color: #ff8000;
+}
