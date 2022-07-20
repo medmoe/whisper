@@ -1,0 +1,90 @@
+.textAreaContainer {
+    position: relative;
+    border: 2px solid #f1f6f0;
+    width: 73%;
+    height: 73vh;
+    background-color: #ffffff;
+    overflow: auto;
+    bottom: 0;
+
+}
+.availableUsersContainer {
+    position: absolute;
+    border: 2px solid #f1f6f0;
+    width: 26%;
+    height: 73vh;
+    left: 73%;
+    top: 0;
+    background-color: #ffffff;
+}
+.controllers {
+    position: absolute;
+    width: 26.5%;
+    height: 26vh;
+    top: 73%;
+    left: 73%;
+    background-color: #ffffff;
+    border: 2px solid #f1f6f0;
+}
+.messaging_container {
+    position: absolute;
+    width: 73%;
+    height: 26vh;
+    background-color: #ffffff;
+    border: 2px solid #f1f6f0;
+    top: 73%;
+}
+.messaging_container input {
+    position: absolute;
+    width: 99%;
+    border: none;
+    height: 26vh;
+    outline: none;
+    font-size: 32px;
+}
+#send {
+    position: absolute;
+    background-color: #24a0ff;
+    width: 285px;
+    height: 120px;
+    cursor: pointer;
+}
+#send:hover{
+    background-color: #24a0e0;
+}
+#send p {
+    position: absolute;
+    text-transform: uppercase;
+    font-family: 'Crimson', sans-serif;
+    font-weight: 400;
+    font-size: 58px;
+    line-height: 75px;
+    color: #FFFFFF;
+    left: 70px;
+    top: -29px;
+}
+
+#exit{
+    position: absolute;
+    width: 285px;
+    height: 18vh;
+    top: 120px;
+}
+#exit p {
+    position: absolute;
+    font-size: 58px;
+    text-transform: uppercase;
+    left: 70px;
+}
+#exit p:hover{
+    cursor: pointer;
+}
+#exit img {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    left: 198px;
+    top: 63px;
+    filter: invert(50%) sepia(30%) saturate(3461%) hue-rotate(321deg) brightness(98%) contrast(91%);
+
+}

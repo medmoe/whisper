@@ -1,0 +1,33 @@
+.messages_container {
+    display: flex;
+    font-family: 'Tibetan Machine Uni', sans-serif;
+    margin: 10px auto;
+}
+.messages_container div {
+    margin-right: 5px;
+}
+
+.user_image {
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    background-color: #EEEEEE;
+    left: 48px;
+    text-align: center;
+}
+.user_image p{
+    position: absolute;
+    text-transform: uppercase;
+    font-size: 12px;
+    left: 25px;
+    margin-top: 27px;
+}
+
+.user_text {
+    width: 596px;
+    left: 135px;
+    background-color: #eeeeee;
+    border-radius: 10px;
+    top: 20px;
+    text-align: center;
+}

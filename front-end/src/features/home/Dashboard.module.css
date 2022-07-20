@@ -124,7 +124,17 @@
     font-weight: bold;
     border-radius: 10px;
     cursor: pointer;
+    margin-right: 20px;
 }
 .btn:hover{
     background-color: #ff8000;
+}
+.table_row {
+    font-family: "Tibetan Machine Uni", sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+}
+.table_row:hover{
+    background-color: #f7e1b5;
+    cursor: pointer;
 }

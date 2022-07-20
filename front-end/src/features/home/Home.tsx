@@ -65,6 +65,7 @@ export function Home() {
             .then((res) => {
                 setHomeData(homeInit);
                 setFormData(formDataInit);
+                dispatch(updateRoomsAreFetched())
             })
             .catch((err) => {
                 console.log(err);

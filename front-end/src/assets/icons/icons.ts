@@ -17,3 +17,12 @@ export const categories: Category[] = [
     {name: 'food', url: food},
     {name: 'water', url: water},
 ]
+
+export const categories_object: any = {
+    buildings: building,
+    movie: movie,
+    music: music,
+    travel: travel,
+    food: food,
+    water: water,
+}
