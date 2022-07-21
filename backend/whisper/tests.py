@@ -1,6 +1,10 @@
+from channels.testing import ChannelsLiveServerTestCase
 from rest_framework import status
-
 from rest_framework.test import APITestCase
+from selenium import webdriver
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
 from .models import User, Session, Room
 
 
@@ -65,7 +69,6 @@ class TestRoomHandlers(APITestCase):
         login_response = self.client.post('/login/', data={'username': 'med', 'password': 'secret'}, format='json')
         self.assertEqual(login_response.status_code, status.HTTP_200_OK)
         response = self.client.get('/rooms/?category=buildings')
-        print(response.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 2)
 
@@ -111,6 +114,7 @@ class TestRoomHandlers(APITestCase):
         }
         response_of_created_room = self.client.post('/rooms/', data=room_data, format='json')
         self.assertEqual(len(Room.objects.all()), 3)
-        response = self.client.delete(f'/rooms/{response_of_created_room.data["id"]}/', data=response_of_created_room.data)
+        response = self.client.delete(f'/rooms/{response_of_created_room.data["id"]}/',
+                                      data=response_of_created_room.data)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(len(Room.objects.all()), 2)
